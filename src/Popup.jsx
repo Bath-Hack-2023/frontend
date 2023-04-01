@@ -1,30 +1,43 @@
-import React, { useState } from "react";
+// import react stuff
+import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
-import Other from "./Other.jsx";
-import "./css/Popup.css";
-// import getURL from "./functions/getURL.js";
 
-function getURL(setURL) {
-	let url;
-	chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-		setURL(tabs[0].url);
-		// use `url` here inside the callback because it's asynchronous!
-	});
-}
+// import functions
+import genHash from "./functions/genHash.js";
+import getURL from "./functions/getURL.js";
+
+// import css
+import "./css/Popup.css";
+import getIP from "./functions/getIP.js";
 
 export default function Popup() {
-	console.log("test");
-	console.log(URL);
-	
+	// set url state
 	const [url, setURL] = useState("");
-	getURL(setURL);
+
+	// set hash state
+	const [hash, setHash] = useState("");
+
+	// set IP state
+	const [IP, setIP] = useState();
+
+	useEffect(() => {
+		console.log("geturl");
+		getURL(setURL);
+		console.log("getip");
+		getIP(setIP);
+	}, []);
+
+	useEffect(() => {
+		IP !== undefined && genHash(setHash, IP);
+	}, [IP]);
 
 	return (
 		<div>
 			{url && <div>URL: {url}</div>}
+			{hash && <div>hash: {hash}</div>}
+			{IP && <div>IP: {IP}</div>}
 			<h1>Demo</h1>
 			<p>simple popup</p>
-			<Other />
 		</div>
 	);
 }
