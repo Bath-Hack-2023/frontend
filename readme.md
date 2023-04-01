@@ -1,8 +1,8 @@
-# react-chrome-extension-demo
+# frontend
 
 ## Installation
 
-To install react-chrome-extension-demo, follow these steps:
+To install frontend , follow these steps:
 
 1. Clone the repository to your local machine.
 2. Navigate to the project directory and run `npm install` to install dependencies.
