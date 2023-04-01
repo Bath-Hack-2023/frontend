@@ -5,10 +5,10 @@ import { render } from "react-dom";
 // import functions
 import genHash from "./functions/genHash.js";
 import getURL from "./functions/getURL.js";
-
 // import css
 import "./css/Popup.css";
 import getIP from "./functions/getIP.js";
+import Table from "./components/Grid.jsx";
 
 export default function Popup() {
 	// set url state
@@ -38,6 +38,7 @@ export default function Popup() {
 			{IP && <div>IP: {IP}</div>}
 			<h1>Demo</h1>
 			<p>simple popup</p>
+			<Table/>
 		</div>
 	);
 }
