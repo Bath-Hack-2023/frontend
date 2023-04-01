@@ -15,9 +15,10 @@ export default function genHash(setHash, IP) {
 	const timestamp = current_date.getTime();
 	const random_number = Math.random();
 
-	const hash_string = timestamp.toString() + IP + random_number.toString();
+	const hash_string = timestamp.toString() + random_number.toString();
 
 	console.log(hash_string, btoa(hash_string))
 
 	setHash(window.btoa(hash_string));
+	console.log("set hash in genHash")
 }
