@@ -1,0 +1,43 @@
+.results {
+    max-width: 75%;
+}
+
+list {
+    font-family: 'Work Sans', sans-serif;
+    padding: 0.5rem;
+    line-height: 28px;
+    font-size: 16px;
+  }
+  
+  .uvp-list ul {
+    display: inline-block;
+    max-width: 320px;
+  }
+  
+  .uvp-list ul {
+    list-style: none;
+  }
+  
+  .uvp-list ul > li {
+    clear: left;
+ 
+  }
+   
+  .uvp-list ul > li:before {
+    content: "";
+    height: 1.5rem;
+    width: 1.5rem;
+    display: block;
+    float: left;
+    margin-left: -1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: 100%: */
+  }
+  
+  .uvp-list ul > li:before { 
+    background: url("https://info.openpath.com/hubfs/checkmark-round-orange.svg");
+    background-size: cover;
+    background-position: center;
+    padding: .15rem;
+  }

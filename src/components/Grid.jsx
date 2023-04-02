@@ -10,11 +10,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Badge from 'react-bootstrap/Badge';
 import "../css/Rating.css";
-import 'font-awesome/css/font-awesome.min.css';
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import "../css/List.css";
 
-const element = <FontAwesomeIcon icon={faEnvelope} />
 
 export default function Grid() {
   const [rating, setRating] = useState(25)
@@ -22,19 +19,15 @@ export default function Grid() {
     setRating(rate)
   }
   return (
-    <div>
-      <Container className="star-container">
+    <div className='results'>
+      {/* <Container className="star-container">
         <Row>
-          <Rating
-            onClick={handleRating}
-            allowFraction
-            readonly={true}
-            initialValue={2.5} />
+          
         </Row>
-      </Container>
+      </Container> */}
 
       <Container className="details-container">
-        <Row className="col-heading">
+        <Row className="col-heading colour">
           <Col xs={2}>Co2</Col>
           <Col xs={10}>Details</Col>
         </Row>
@@ -44,7 +37,14 @@ export default function Grid() {
           <img src="../logos/co2_1.png" alt="co2" />
           </Col>
           <Col xs={10}>
-          <FontAwesomeIcon icon={icon({name: 'coffee', style: 'regular'})} /> // Defaults to Classic family
+          <div class="uvp-list list">
+            <ul>
+              <li>Title: Apple Iphone</li>
+              <li>Manufacture: Apple</li>
+              <li>Number of trees need to be planted: 50</li>
+              <li><Rating onClick={handleRating} size="20" allowFraction readonly={true} initialValue={2.5} /></li>
+            </ul>
+         </div>
           <div className='badge-container'>
           <Badge bg="info">Your Choice</Badge>
           </div>
@@ -56,10 +56,14 @@ export default function Grid() {
           <img src="../logos/co2_1.png" alt="co2" />
           </Col>
           <Col xs={10}>
-          <ListGroup>
-            <ListGroup.Item>Apple iPhone 12 (128GB) - Black</ListGroup.Item>
-            <ListGroup.Item>Manufacture: Apple</ListGroup.Item>
-          </ListGroup>
+          <div class="uvp-list list">
+            <ul>
+              <li>Title: Apple Iphone</li>
+              <li>Manufacture: Apple</li>
+              <li>Number of trees need to be planted: 50</li>
+              <li><Rating onClick={handleRating} size="20" allowFraction readonly={true} initialValue={2.5} /></li>
+            </ul>
+         </div>
           <div className='badge-container'>
           <Badge bg="success">Co2 Winner</Badge>
           </div>
@@ -71,10 +75,14 @@ export default function Grid() {
           <img src="../logos/co2_1.png" alt="co2" />
           </Col>
           <Col xs={10}>
-          <ListGroup>
-            <ListGroup.Item>Apple iPhone 12 (128GB) - Black</ListGroup.Item>
-            <ListGroup.Item>Manufacture: Apple</ListGroup.Item>
-          </ListGroup>
+          <div class="uvp-list list">
+            <ul>
+              <li>Title: Apple Iphone</li>
+              <li>Manufacture: Apple</li>
+              <li>Number of trees need to be planted: 50</li>
+              <li><Rating onClick={handleRating} size="20" allowFraction readonly={true} initialValue={2.5} /></li>
+            </ul>
+         </div>
           <div className='badge-container'>
           <Badge bg="primary">Statisfaction Winner</Badge>
           </div>
@@ -86,10 +94,14 @@ export default function Grid() {
           <img src="../logos/co2_1.png" alt="co2" />
           </Col>
           <Col xs={10}>
-          <ListGroup>
-            <ListGroup.Item>Apple iPhone 12 (128GB) - Black</ListGroup.Item>
-            <ListGroup.Item>Manufacture: Apple</ListGroup.Item>
-          </ListGroup>
+          <div class="uvp-list list">
+            <ul>
+              <li>Title: Apple Iphone</li>
+              <li>Manufacture: Apple</li>
+              <li>Number of trees need to be planted: 50</li>
+              <li><Rating onClick={handleRating} size="20" allowFraction readonly={true} initialValue={2.5} /></li>
+            </ul>
+         </div>
           <div className='badge-container'>
           <Badge bg="warning">Best Value</Badge>
           </div>
@@ -101,10 +113,14 @@ export default function Grid() {
           <img src="../logos/co2_1.png" alt="co2" />
           </Col>
           <Col xs={10}>
-          <ListGroup>
-            <ListGroup.Item>Apple iPhone 12 (128GB) - Black</ListGroup.Item>
-            <ListGroup.Item>Manufacture: Apple</ListGroup.Item>
-          </ListGroup>
+          <div class="uvp-list list">
+            <ul>
+              <li>Title: Apple Iphone</li>
+              <li>Manufacture: Apple</li>
+              <li>Number of trees need to be planted: 50</li>
+              <li><Rating onClick={handleRating} size="20" allowFraction readonly={true} initialValue={2.5} /></li>
+            </ul>
+         </div>
           <div className='badge-container'>
           <Badge bg="danger">Highest Co2</Badge>
           </div>
