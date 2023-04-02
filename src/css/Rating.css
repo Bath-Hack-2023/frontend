@@ -1,0 +1,48 @@
+.star-container > div > span, .star-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.star-container > div > div {
+    width: auto;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.col-heading {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.row {
+    border: 1px solid black;
+    width: 100%;
+
+}
+
+.details-row {
+    display: flex;
+    justify-content: center;
+}
+
+.badge-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+img {
+    max-width: 60px;
+}

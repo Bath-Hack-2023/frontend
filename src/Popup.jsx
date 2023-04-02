@@ -2,18 +2,23 @@
 import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
 
+// import rfcs
+import Grid from "./components/Grid.jsx";
+import Spinner from "react-bootstrap/Spinner";
+
 // import other packages
 import axios from "axios";
 import db from "../firebase.js";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 // import functions
 import genHash from "./functions/genHash.js";
 import getURL from "./functions/getURL.js";
-import getIP from "./functions/getIP.js";
 
 // import css
 import "./css/Popup.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/Modal.css";
 
 export default function Popup() {
 	// set url state
@@ -28,50 +33,104 @@ export default function Popup() {
 	// set request state
 	const [state, setState] = useState("sending request to server...");
 
-	let product_carbon_data;
+	// set product carbon state
+	const [productData, setProductData] = useState();
 
-	useEffect(() => {
-		console.log("geturl");
-		console.log("getip");
-		// getIP(setIP);
+	// set recommendation data
+	const [recommendationData, setRecommendationData] = useState();
 
-		console.log("hash generated");
-		getURL(setURL);
-		console.log(url);
-		genHash(setHash);
-		
-	}, []);
+	// set url hostname state
+	const [urlHostname, setUrlHostname] = useState("");
 
+	// set base url for axios requests
 	const api = axios.create({
-		baseURL: "http://139.162.238.235:6969",
+		baseURL: "https://bath-hack-2023.eugene-dev.com:6969",
 	});
 
+	// on page load, get url and generate a hash
 	useEffect(() => {
+		getURL(setURL);
+		genHash(setHash);
+	}, []);
+
+	useEffect(() => {
+		let url_hostname;
+
+		url && (url_hostname = new URL(url));
+		url && setUrlHostname(url_hostname.hostname);
+		console.log(urlHostname);
 		console.log("hash changed to: ", hash);
-		url && hash && api.post("/post/item", {
-			client_id: hash,
-			url: url,
-		}).then((res) => {
-			product_carbon_data = res.data;
-			console.log(product_carbon_data);
-		});
-		url && hash && onSnapshot(doc(db, "client_states", hash), (doc) => {
-			setState(doc.data().state);
-			// setState((doc) => console.log(doc));
-		});
+		url &&
+			hash &&
+			api
+				.post("/post/item", {
+					client_id: hash,
+					url: url,
+				})
+				.then((res) => {
+					console.log(res.data.data);
+					setProductData(res.data.data);
+					console.log(res.data.data);
+				});
+		url &&
+			hash &&
+			onSnapshot(doc(db, "client_states", hash), (doc) => {
+				doc.data().state === "Sending data"
+					? setState("received")
+					: setState(doc.data().state);
+				console.log(state);
+			});
+		url &&
+			hash &&
+			api
+				.post("/post/recommendations", {
+					url: url,
+				})
+				.then((res) => {
+					console.log(res);
+					setRecommendationData(res.data.data.recommended);
+					console.log(res.data.data.recommended);
+				});
 		// console.log("sending request...");
 		// // doc(db, "client_states", hash).set;
 		// console.log(url);
 	}, [hash, url]);
 
 	return (
-		<div>
-			{url && <div>URL: {url}</div>}
+		<div id="popup-container">
+			{/* {url && <div>URL: {url}</div>}
 			{hash && <div>hash: {hash}</div>}
-			{state && <div>state: {state}</div>}
-			{product_carbon_data && <div>{product_carbon_data}</div>}
-			<h1>Demo</h1>
-			<p>simple popup</p>
+			{productCarbon && <div>{productCarbon}</div>} */
+			/* setState("received")*/}
+			<div id="spinner_and_state_container">
+				{state !== "received" ? (
+					<div className="loading-container">
+						<Spinner animation="border" role="status">
+							<span className="visually-hidden">Loading...</span>
+						</Spinner>
+						<div id="loading-state">{state}</div>
+					</div>
+				) : (
+					<div>
+						<div>
+							{productData && (
+								<div>
+									<div>
+										KG of CO2: {productData.carbon_data}
+									</div>
+									<div>
+										KG of CO2 by {productData.manufacturer}:{" "}
+										{productData.man_carbon_data}
+									</div>
+								</div>
+							)}
+						</div>
+						{recommendationData && (
+							<Grid recommendationData={recommendationData} />
+						)}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }
