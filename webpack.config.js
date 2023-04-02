@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
 	// What the main entry point is to our app
 	entry: {
-		popup: "./src/popup.jsx",
+		popup: "./src/Popup.jsx",
 	},
 	// Where we are putting the result of compiling that file to js
 	output: {
@@ -48,7 +48,7 @@ module.exports = {
 		// Manifest.json contains some very basic information about our app like the name of it, what version of the app it is and
 		// most importantly the "deafault_action", which is the code that's run when the chrome extesion is clicked.
 		new CopyPlugin({
-			patterns: [{ from: "public" }],
+			patterns: [{ from: "src/logos", to: "logos"}],
 		}),
 		new MiniCssExtractPlugin(),
 	],
