@@ -35,7 +35,7 @@ export default function Grid(props) {
 
 			<Container className="details-container">
 				<Row className="col-heading colour">
-					<Col xs={2}>Co2</Col>
+					<Col xs={2}>CO2 - KG</Col>
 					<Col xs={10}>Details</Col>
 				</Row>
 				{console.log("before recommendation map")}
@@ -45,23 +45,27 @@ export default function Grid(props) {
 							<Row className="details-row">
 								{console.log("in recommendation loop")}
 								<Col xs={2}>
-									KG of CO2: {recommendation.product_co2}
-									<img src="../logos/co2_1.png" alt="co2" />
+									{Math.round(
+										recommendation.product_co2 * 100
+									) / 100}
+									<img
+										src={`../logos/co2_${n}.png`}
+										alt="co2"
+									/>
 								</Col>
 								<Col xs={10}>
 									<div class="uvp-list list">
 										<ul>
-											<li>
-												{recommendation.product_title}
-											</li>
-											<li>
-												{recommendation.manufacturer}
-											</li>
+											<li>{recommendation.product}</li>
+											<li>{recommendation.manu}</li>
 											<li>
 												Number of trees need to be
 												planted to offset this purchase:
-												{recommendation.product_co2 /
-													22.2}
+												{Math.round(
+													(recommendation.product_co2 /
+														22.2) *
+														100
+												) / 100}
 											</li>
 											<li>
 												<Rating
@@ -69,13 +73,15 @@ export default function Grid(props) {
 													size="20"
 													allowFraction
 													readonly={true}
-													initialValue={rating}
+													initialValue={
+														recommendation.rating
+													}
 												/>
 											</li>
 										</ul>
 									</div>
 									<div className="badge-container">
-										<Badge bg="info">
+										<Badge bg="secondary">
 											Recommendation {n}
 										</Badge>
 									</div>

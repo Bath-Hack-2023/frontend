@@ -96,6 +96,7 @@ export default function Popup() {
 		// console.log(url);
 	}, [hash, url]);
 
+
 	return (
 		<div id="popup-container">
 			{/* {url && <div>URL: {url}</div>}
@@ -114,19 +115,27 @@ export default function Popup() {
 					<div>
 						<div>
 							{productData && (
-								<div>
+								<div id="product-data-container">
 									<div>
 										KG of CO2: {productData.carbon_data}
 									</div>
 									<div>
 										KG of CO2 by {productData.manufacturer}:{" "}
-										{productData.man_carbon_data}
+										{productData.manu_carbon_data}
 									</div>
 								</div>
 							)}
 						</div>
-						{recommendationData && (
+						{recommendationData ? (
 							<Grid recommendationData={recommendationData} />
+						) : (
+							<div className="loading-container">
+								<Spinner animation="border" role="status">
+									<span className="visually-hidden">
+										Loading...
+									</span>
+								</Spinner>
+							</div>
 						)}
 					</div>
 				)}
