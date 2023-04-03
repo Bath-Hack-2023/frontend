@@ -11,6 +11,5 @@ To install frontend , follow these steps:
 5. Enable "Developer mode" in the top right corner.
 6. Click "Load unpacked" and select the `dist` folder in the project directory.
 
-## License
-
-react-chrome-extension-demo is licensed under the [MIT License](LICENSE).
+## 
+HonestEmissions chrome extension is licensed under the [MIT License](LICENSE).
